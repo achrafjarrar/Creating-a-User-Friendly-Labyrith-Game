@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\Users\charc\Desktop\Java_Projet\jarrar-achraf\tp04\.metadata\.plugins\org.eclipse.jdt.core

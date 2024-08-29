@@ -1,0 +1,165 @@
+package Maze;
+import graph.Graph;
+import graph.Distance;
+import graph.Vertex;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.util.ArrayList;
+public class Maze implements Graph , Distance 
+{private MazeBox[][] maze; //J'ai choisis de travailler avec un tableau de tableau car c'est plus pratique pour coder des matrices
+ public Maze (MazeBox[][] maze)
+ {
+	 this.maze = maze;
+	 
+ }
+ public ArrayList<Vertex> getAllVertexes() {
+	 int ligneLength = maze.length;
+	 int colonneLength = maze[0].length;
+	 ArrayList<Vertex> l = new ArrayList();
+	 for (int i = 0  ; i<ligneLength ; i++) 
+	 {
+		 for (int j = 0 ; j < colonneLength ; j++)
+		 {
+			 l.add(maze[i][j]);
+		 }
+	 }
+	 return l;
+ }
+ public ArrayList<Vertex> getSuccessors(Vertex v )
+ {
+	 ArrayList<Vertex> l = new ArrayList();
+	 MazeBox box = (MazeBox) v;
+	int i = box.getAbscisse();
+	int j = box.getOrdonnee();
+	  try {
+		  if (maze[i][j+1].getWall() == false ) //On essaie le voisin à gauche en vérifiant si il est bloquant ou pas
+		  {
+			  l.add(maze[i][j+1]);
+		  }
+	  }
+		  catch(Exception ex) {} // Si on est dans la colonne la plus à droite on aura une exception ( IndexOutofBounds )
+	  try {
+		  if (maze[i][j-1].getWall() == false) // On essaie le voisin à droite
+		  {
+			  l.add(maze[i][j-1]);
+		  }
+	  }
+	  catch (Exception ex) {}
+	  if (i%2 == 1) //J'ai constaté que selon le cas si on est dans une ligne d'indice pair ou impair on doit pas vérifier les mêmes voisins en haut et en bas
+		  // Je me suis basé sur le graphe donné en tp07 en vérifiant les cas
+	  {
+	  try {
+		  if (maze[i-1][j].getWall() == false ) // On essaie le voisin en haut à gauche
+		  {
+			  l.add(maze[i-1][j]);
+		  }}
+		catch (Exception ex) {};
+	  try {
+		  if (maze[i-1][j+1].getWall() == false ) // On essaie le voisin en haut à droite
+		  {
+			  l.add(maze[i-1][j+1]);
+	      }
+          }
+	  catch (Exception ex) {};
+	  try {
+			if(maze[i+1][j].getWall()==false) // On essaie le voisin en bas à gauche
+	  {
+		  l.add(maze[i+1][j]);
+		  
+	  }
+}
+	  catch(Exception ex) {};
+	  try {
+		  if (maze[i+1][j+1].getWall() == false) // On essaie le voisin en bas à droite
+		  {
+			  l.add(maze[i+1][j+1]);
+		  }
+	  }
+	  catch(Exception ex) {};
+	  	
+}
+	  if (i%2 == 0) {try {
+		  if (maze[i-1][j-1].getWall() == false ) // On essaie le voisin en haut à gauche
+		  {
+			  l.add(maze[i-1][j-1]);
+		  }}
+		catch (Exception ex) {};
+	  try {
+		  if (maze[i-1][j].getWall() == false ) // On essaie le voisin en haut à droite
+		  {
+			  l.add(maze[i-1][j]);
+	      }
+          }
+	  catch (Exception ex) {};
+	  try {
+			if(maze[i+1][j].getWall()==false) //On essaie le voisin en bas à droite
+	  {
+		  l.add(maze[i+1][j]);
+		  
+	  }
+}
+	  catch(Exception ex) {};
+	  try {
+		  if (maze[i+1][j-1].getWall() == false)// On essaie le voisin en bas à gauche
+		  {
+			  l.add(maze[i+1][j-1]);
+		  }
+	  }
+	  catch(Exception ex) {};
+		  
+	  }
+
+   return l;} 
+public int getDistance(Vertex v1 , Vertex v2 ) 
+{
+	ArrayList<Vertex> l = getSuccessors(v1);
+	for (Vertex v : l ) 
+	{
+		if (v == v2 )
+		{
+			return 1;
+		}
+	}
+	return Integer.MAX_VALUE;
+	
+}
+public final void initFromTextFile(String fileName) throws Exception , MazeReadingException 
+{
+try (FileReader fr = new FileReader(fileName);// l'utilisation de BufferedReader me semble plus simple 
+		BufferedReader br = new BufferedReader(fr);
+		)
+{
+	int lineNumber = 0 ; //on va comparer cette valeur avec le nombre le lignes de notre Maze
+	while(br.ready() == true ) //Tant qu'on a un caractère à lire
+	{
+	  String line = br.readLine();
+	  lineNumber = lineNumber+1;
+	  if ((line.length()) != (maze[0].length))
+	  {
+	    throw new MazeReadingException(fileName, lineNumber,"Pas de cohérence entre le nombre de colonne attendu et celui donné à la ligne " + lineNumber) ;
+	  }
+	  for (int k = 0 ; k < line.length() ; k++) 
+	  {
+		  switch (line.charAt(k)) 
+		  {
+		  case 'A' : maze[lineNumber-1][k] = new ArrivalBox(lineNumber-1,k); break;
+		  case 'D' : maze[lineNumber-1][k] = new DepartureBox(lineNumber-1,k);break;
+		  case 'W' : maze[lineNumber-1][k] = new WallBox(lineNumber-1,k);break;
+		  case 'E' : maze[lineNumber-1][k] = new EmptyBox(lineNumber-1,k);break;
+		  default  : throw new MazeReadingException(fileName, lineNumber, "Le caractère à la ligne " + lineNumber +"à la colonne" + (k+1) +"n'est pas cohérent avec les 4 possibilités");
+		  }
+		  
+	  }
+	}
+	if ((lineNumber) != (maze.length) )
+	{
+		throw new MazeReadingException(fileName , lineNumber , "Le nombre de ligne n'est pas correcte");
+	}
+	
+}
+ catch(Exception ex) {ex.printStackTrace();} // La fermeture  de br et fr est automatique
+	
+
+}
+}

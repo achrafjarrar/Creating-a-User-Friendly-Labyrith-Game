@@ -1,0 +1,25 @@
+package graph;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class ShortestPathsImpl extends HashMap<Vertex,Vertex> implements ShortestPaths 
+{HashMap<Vertex,Vertex> hp;
+ public ShortestPathsImpl ()//créer une HashMap vide
+ {
+	 super();
+ }
+ public final void setPrevious(Vertex v1 , Vertex v2) 
+ {
+	 hp.put(v1, v2);// v2 est le prédecesseur de v1 (qui est la clé)
+ }
+ public final ArrayList<Vertex> shortestPath(Vertex v) 
+ { Vertex v1 = v;
+ ArrayList<Vertex> l = new ArrayList();
+	 while ( v1 != null )
+	 {
+		 l.add(v1);
+		 v1 = hp.get(v1);
+	 }
+	 return l;
+ }
+}

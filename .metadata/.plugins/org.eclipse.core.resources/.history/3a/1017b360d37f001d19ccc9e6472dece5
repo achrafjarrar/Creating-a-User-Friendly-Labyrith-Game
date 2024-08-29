@@ -1,0 +1,11 @@
+package Maze;
+import graph.Vertex;
+public abstract class MazeBox implements Vertex {
+	private int i;//l'abscisse dans le graphe
+	private int j;//l'ordonnée dans le graphe
+	private String symbol;//son symbole ("D" pour départ , "A" pour arrivé .. )
+	public abstract String getSymbol(Vertex v);
+	
+	
+
+}

@@ -1,0 +1,40 @@
+package graph;
+import java.util.ArrayList;
+public class Dijkstra {
+	public ArrayList<Vertex> dijkstra(Graph graph , ShortestPaths shortestPaths , MinDistance minDistance , ProcessedVertex processedVertexes , Distance distance , Vertex startVertex , Vertex endVertex) {
+		processedVertexes.add(startVertex);
+		Vertex pivotVertex = startVertex;
+		minDistance.setMindistance(pivotVertex , 0);
+		for (Vertex v : graph.getAllVertexes()) 
+		{
+			if (v != pivotVertex) 
+			{minDistance.setMindistance(v, Float.POSITIVE_INFINITY);
+			}
+		}
+		while(processedVertexes.verify(endVertex) == false ) 
+		{
+		  for (Vertex v : graph.getSuccessos(pivotVertex)) 
+		  {
+			  if (minDistance.getMindistance(v) > distance.getDistance(pivotVertex,v) + minDistance.getMindistance(pivotVertex)) 
+			  {
+			  minDistance.setMindistance(v, distance.getDistance(pivotVertex, v) + minDistance.getMindistance(pivotVertex));
+			  shortestPaths.setPrevious(v,pivotVertex);
+			  
+			  }
+		  }
+		  float min = Float.POSITIVE_INFINITY;
+		  Vertex newPivot = startVertex;
+		  for(Vertex v : graph.getAllVertexes())
+		  { if ((processedVertexes.verify(v) == false) && (minDistance.getMindistance(v) < min)) 
+		  {
+			  min = minDistance.getMindistance(v);
+			  newPivot = v;
+		  }  
+		  }
+		  processedVertexes.add(newPivot);
+		  pivotVertex = newPivot;
+		 
+		}
+		return shortestPaths.shortestPath(endVertex);
+	}
+}

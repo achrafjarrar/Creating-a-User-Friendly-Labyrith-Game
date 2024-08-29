@@ -1,0 +1,7 @@
+package graph;
+
+public interface ProcessedVertex {
+	public void add (Vertex v); //Ajouter un nouveau sommet à processedVertex
+	public boolean verify(Vertex v); //Vérifie si un sommet existe dans processedVertex
+
+}

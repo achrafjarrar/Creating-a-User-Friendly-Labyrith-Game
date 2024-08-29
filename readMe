@@ -1,0 +1,55 @@
+Welcome to my project ! 
+Here are some useful information :
+I) If you are using the interface part , you should know that there are two ways on creating the maze !
+***!!!!! Please go to the package "interfaceGraphique" , then to the class "StartMyMaze" to display and run the code !!!!!****
+*The first one is by clicking on "Load" button. Choose your file and remember that the following cases will give you error messages :
+**Loading an empty file.
+**Loading files that are not text files.
+**Loading a file where you don't have the same number of boxes per line.
+**Loading a file that contains a character which isn't in the following list {'E','A','D','W'}.
+**Loading a file with having more than one 'A' or 'D' character.
+**Loading a non-existent file.
+*The second one is by clicking on "Create new maze" button.
+**Choose the number of lines.
+**Choose the number of columns.
+**You can't put characters that are not numbers or numbers less than 1.
+**You will have a maze where all the polygons are empty.
+- To change the nature of a polygon there are two different ways : 
+** You can simply click on the polygon , a small window would pop-up asking you to choose the label :
+A for 'Arrival' , D for 'Departure', E for 'Empty' , W for 'Wall'. 
+Once you select it , the polygon will turn to the chosen type.
+** You can use Quick mode : Click on 'Quick mode' button.
+A small window would pop-up asking you which label you want to select between 'E' and 'W'.
+Once you select your label. Just click on the polygons that you want to turn into the type you've chosen.
+!!!Once you finish , don't forget to click on 'End quick mode' button !!!
+You won't need this mode to select your arrival and departure hexagones because you only need one for both and it doesn't require 
+much time to put them.
+- Once you finish preparing your maze and after putting your arrival and departure polygons , you can click on 'Solve' to find
+the shortest path between these two.
+- If you click on solve and the red panel on the right turns to green, it means that there is a solution and it is displayed by tied 
+segments going through the centers of the polygons forming the path.
+- If the red panel stays red , it means there is no solution.
+- You can click on 'Unsolve' button to take off the path.
+- You can save your maze by clicking on 'Save as' button. Choose where you wanna put your file and name it.
+- If any changes occur , you can save them simply by clicking on 'Save' button.
+- You can find some load examples and savings I've done respectively  in the loadSample folder and the saveAs folder
+ in the project explorer 
+ -!!! Finally when you run the code you will be asked if you want to be reminded of some of these tips.!!!
+II) if you are using the first part with the files :
+****!!!!! Please go to the package "maze", then to the class "MainTestWithFiles" and run the code !!!!!****
+- Creating an empty maze will with n lines and c columns will be like this : Maze m = new Maze(new MazeBox[n][c]);
+- When you want to initialize it with a file , the file you choose must respect the following conditions :
+**It must have n lines and c columns.
+**It mustn't be empty.
+**It must exist to begin with.
+**It must have one and only arrival and departure box.
+**It must not have a character that isn't 'A' or 'D' or 'E' or 'W'.
+ !!!!!!!!!! Each time you choose a new file , remember to change your maze m and adapt it to your file ( by changing n or/and c)!!!!!!!!!!
+ - After creating your maze , it will be solved and put in a file you choose.
+ ** If there is no solution : your file will contain the following message "Pas de solution".
+ ** If there is a solution : it will be displayed by dots from the departure box to the arrival one. The dots go through the empty 
+ boxes forming the path.
+ - You can find some examples of mazes and their solutions or some examples of mazes with errors in the folder "data" in the project explorer.
+ Thanks for you attention and I hope you like my project !
+
+

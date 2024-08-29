@@ -1,0 +1,13 @@
+package Maze;
+
+public final class WallBox extends MazeBox {
+	public WallBox (int i , int j , String symbol) 
+	{
+		super(i,j,symbol);
+	}
+	public boolean getWall() 
+	{
+		return true;
+	}
+
+}

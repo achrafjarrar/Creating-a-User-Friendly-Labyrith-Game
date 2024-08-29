@@ -1,0 +1,124 @@
+package Maze;
+import graph.Graph;
+import graph.Distance;
+import graph.Vertex;
+import java.util.ArrayList;
+public class Maze implements Graph , Distance 
+{private MazeBox[][] maze; //J'ai choisis de travailler avec un tableau de tableau car c'est plus pratique pour coder des matrices
+ public Maze (MazeBox[][] maze)
+ {
+	 this.maze = maze;
+	 
+ }
+ public ArrayList<Vertex> getAllVertexes() {
+	 int ligneLength = maze.length;
+	 int colonneLength = maze[0].length;
+	 ArrayList<Vertex> l = new ArrayList();
+	 for (int i = 0  ; i<ligneLength ; i++) 
+	 {
+		 for (int j = 0 ; j < colonneLength ; j++)
+		 {
+			 l.add(maze[i][j]);
+		 }
+	 }
+	 return l;
+ }
+ public ArrayList<Vertex> getSuccessors(Vertex v )
+ {
+	 ArrayList<Vertex> l = new ArrayList();
+	 MazeBox box = (MazeBox) v;
+	int i = box.getAbscisse();
+	int j = box.getOrdonnee();
+	  try {
+		  if (maze[i][j+1].getWall() == false ) //On essaie le voisin à gauche en vérifiant si il est bloquant ou pas
+		  {
+			  l.add(maze[i][j+1]);
+		  }
+	  }
+		  catch(Exception ex) {} // Si on est dans la colonne la plus à droite on aura une exception ( IndexOutofBounds )
+	  try {
+		  if (maze[i][j-1].getWall() == false) // On essaie le voisin à droite
+		  {
+			  l.add(maze[i][j-1]);
+		  }
+	  }
+	  catch (Exception ex) {}
+	  if (i%2 == 1) //J'ai constaté que selon le cas si on est dans une ligne d'indice pair ou impair on doit pas vérifier les mêmes voisins en haut et en bas
+		  // Je me suis basé sur le graphe donné en tp07 en vérifiant les cas
+	  {
+	  try {
+		  if (maze[i-1][j].getWall() == false ) // On essaie le voisin en haut à gauche
+		  {
+			  l.add(maze[i-1][j]);
+		  }}
+		catch (Exception ex) {};
+	  try {
+		  if (maze[i-1][j+1].getWall() == false ) // On essaie le voisin en haut à droite
+		  {
+			  l.add(maze[i-1][j+1]);
+	      }
+          }
+	  catch (Exception ex) {};
+	  try {
+			if(maze[i+1][j].getWall()==false) // On essaie le voisin en bas à gauche
+	  {
+		  l.add(maze[i+1][j]);
+		  
+	  }
+}
+	  catch(Exception ex) {};
+	  try {
+		  if (maze[i+1][j+1].getWall() == false) // On essaie le voisin en bas à droite
+		  {
+			  l.add(maze[i+1][j+1]);
+		  }
+	  }
+	  catch(Exception ex) {};
+	  	
+}
+	  if (i%2 == 0) {try {
+		  if (maze[i-1][j-1].getWall() == false ) // On essaie le voisin en haut à gauche
+		  {
+			  l.add(maze[i-1][j-1]);
+		  }}
+		catch (Exception ex) {};
+	  try {
+		  if (maze[i-1][j].getWall() == false ) // On essaie le voisin en haut à droite
+		  {
+			  l.add(maze[i-1][j]);
+	      }
+          }
+	  catch (Exception ex) {};
+	  try {
+			if(maze[i+1][j].getWall()==false) //On essaie le voisin en bas à droite
+	  {
+		  l.add(maze[i+1][j]);
+		  
+	  }
+}
+	  catch(Exception ex) {};
+	  try {
+		  if (maze[i+1][j-1].getWall() == false)// On essaie le voisin en bas à gauche
+		  {
+			  l.add(maze[i+1][j-1]);
+		  }
+	  }
+	  catch(Exception ex) {};
+		  
+	  }
+
+   return l;} 
+public int getDistance(Vertex v1 , Vertex v2 ) 
+{
+	ArrayList<Vertex> l = getSuccessors(v1);
+	for (Vertex v : l ) 
+	{
+		if (v == v2 )
+		{
+			return 1;
+		}
+	}
+	return Integer.MAX_VALUE;
+	
+}
+}

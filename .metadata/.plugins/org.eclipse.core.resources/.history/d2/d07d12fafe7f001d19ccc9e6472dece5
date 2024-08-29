@@ -1,0 +1,8 @@
+package graph;
+
+public interface MinDistance {
+	public void setMindistance(Vertex v1 , float distance);//Definir la plus petite distance de v1 au sommet de départ
+	public float getMindistance(Vertex v1);//Accéder à la plus petite distance de v1 au sommet de départ
+	
+
+}

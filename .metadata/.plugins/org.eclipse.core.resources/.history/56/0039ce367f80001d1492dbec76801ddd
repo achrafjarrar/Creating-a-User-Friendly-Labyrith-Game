@@ -1,0 +1,17 @@
+package graph;
+import java.util.HashSet;
+public final class ProcessedVertexImpl extends HashSet<Vertex> implements ProcessedVertex  
+{private  HashSet<Vertex> a ;
+public ProcessedVertexImpl(HashSet<Vertex> a) //Construire l'ensemble des sommets (qui va être initialisé à l'ensemble vide
+{
+	super(a);
+}
+public final void addVertex (Vertex v) // ajouter un nouveau sommet
+{
+	a.add(v);
+}
+public final boolean verify(Vertex v)//Vérifier si un sommet existe ou pas
+{
+	return a.contains(v);
+}
+}

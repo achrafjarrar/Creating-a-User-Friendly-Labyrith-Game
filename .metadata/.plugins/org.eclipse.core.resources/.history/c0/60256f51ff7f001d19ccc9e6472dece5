@@ -1,0 +1,8 @@
+package graph;
+import java.util.ArrayList;
+public interface Graph {
+	public ArrayList<Vertex> getAllVertexes();//renvoyer la liste de tous les sommets
+	public ArrayList<Vertex> getSuccessos(Vertex v );//renvoyer la liste des successeurs de v
+	
+
+}

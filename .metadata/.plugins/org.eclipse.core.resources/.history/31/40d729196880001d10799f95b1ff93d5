@@ -1,0 +1,17 @@
+package graph;
+import java.util.HashSet;
+public final class ProcessedVertexImpl extends HashSet<Vertex> implements ProcessedVertex  
+{private  HashSet<Vertex> a ;
+public ProcessedVertexImpl(HashSet<Vertex> a) 
+{
+	this.a = a;
+}
+public final void addVertex (Vertex v) 
+{
+	a.add(v);
+}
+public final boolean verify(Vertex v)
+{
+	
+}
+}

@@ -1,0 +1,18 @@
+package Maze;
+import graph.Graph;
+import graph.Distance;
+import graph.Vertex;
+import java.util.ArrayList;
+public class Maze implements Graph , Distance 
+{private ArrayList<ArrayList<Vertex>> maze;
+ public Maze (ArrayList<ArrayList<Vertex>> maze)
+ {
+	 this.maze = maze;
+ }
+ public ArrayList<Vertex> getAllVertexes()
+ {
+	 for (Vertex v :)
+ }
+	
+	
+}

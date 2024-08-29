@@ -1,0 +1,11 @@
+package Maze;
+public class MainTest {
+
+	public static void main(String[] args) throws Exception , MazeReadingException
+	{
+		Maze maze = new Maze(new MazeBox[10][10]);
+		maze.initFromTextFile("data/labyrinthe.maze");
+		
+	}
+
+}

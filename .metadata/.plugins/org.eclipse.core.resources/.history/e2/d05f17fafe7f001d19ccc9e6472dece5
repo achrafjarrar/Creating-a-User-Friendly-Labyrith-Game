@@ -1,0 +1,6 @@
+package graph;
+
+public interface Distance {
+	public void setDistance(Vertex v1 , Vertex v2, float value);// Definir le poids de l'arc(v1,v2)
+    public float getDistance(Vertex v1, Vertex v2);//Accéder au poids de l'arc (v1,v2)
+}

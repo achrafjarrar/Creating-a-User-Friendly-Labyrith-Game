@@ -1,0 +1,9 @@
+package graph;
+import java.util.ArrayList;
+public interface ShortestPaths {
+	public ArrayList<Vertex> shortestPath(Vertex v);//Renvoie la liste des prédecesseurs définissant le plus court chemin au sommet v
+	public void setPrevious(Vertex v ); // Modifie le prédecesseur du sommet v dans un plus court chemin
+	
+	
+
+}

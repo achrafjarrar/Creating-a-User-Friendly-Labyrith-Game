@@ -1,0 +1,18 @@
+package Maze;
+import graph.Vertex;
+public abstract class MazeBox implements Vertex {
+	private boolean wall;// Oui si la case est bloquante et non sinon
+	private int i;//l'abscisse dans le graphe
+	private int j;//l'ordonnée dans le graphe
+	private String symbol;//son symbole ("D" pour départ , "A" pour arrivé .. )
+	public  String getSymbol(Vertex v) 
+	{
+	   return symbol;
+	};
+	public MazeBox(int i , int j , String symbol) {
+		this.i = i;
+		this.j = j;
+		this.symbol = symbol;
+	}
+	public abstract boolean getWall();//chaque sous_classe de MazeBox aura une valeure différente
+}

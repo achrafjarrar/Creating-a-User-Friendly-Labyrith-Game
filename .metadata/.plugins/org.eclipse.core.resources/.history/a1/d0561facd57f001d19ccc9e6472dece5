@@ -1,0 +1,12 @@
+package Maze;
+public class DepartureBox extends MazeBox
+{
+	public DepartureBox (int i , int j) 
+	{
+		super(i,j,"D");
+	}
+	public boolean getWall() 
+	{
+		return false;
+	}
+}

@@ -1,0 +1,12 @@
+package Maze;
+public final class EmptyBox extends MazeBox {
+	public EmptyBox(int i , int j , String symbol) 
+	{
+		super(i,j,"E");
+	}
+	public boolean getWall() 
+	{
+		return false;
+	}
+
+}
